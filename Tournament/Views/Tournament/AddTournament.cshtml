@@ -1,0 +1,72 @@
+﻿@model ServiceLayer.ViewModel.TournamentModel
+
+@{
+    ViewData["Title"] = "Add Tournament";
+}
+
+<link href="~/css/fontawesome.min.css" rel="stylesheet" />
+<link href="~/css/froala_editor.min.css" rel="stylesheet" />
+
+<h1>Add Tournament</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form enctype="multipart/form-data" asp-action="AddTournament">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group" hidden>
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="YoutubeVideoKey" class="control-label"></label>
+                <input asp-for="YoutubeVideoKey" class="form-control" />
+                <span asp-validation-for="YoutubeVideoKey" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Logo" class="control-label"></label>
+                <div class="custom-file">
+                    <input asp-for="Logo" class="custom-file-input" id="customFile">
+                    <label class="custom-file-label">Choose file</label>
+                </div>
+                <span asp-validation-for="Logo" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Teams</label>
+                @Html.ListBoxFor(x => x.SelectedTeam, ViewBag.Teams as IEnumerable<SelectListItem>, new { @class = "form-control" })
+            </div>
+
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-controller="Home" asp-action="Index">Back to List</a>
+</div>
+
+@section scripts{
+
+
+    <script type="text/javascript">
+
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+
+    </script>
+}
+

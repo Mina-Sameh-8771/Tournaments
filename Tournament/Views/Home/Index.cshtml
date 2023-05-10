@@ -1,0 +1,106 @@
+﻿@model Tournament.Models.HomeViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Administration Panel</h1>
+</div>
+
+<p>
+    <a asp-controller="Team" asp-action="AddTeam">Create New Team</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Logo
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                OfficialWebsiteURL
+            </th>
+            <th>
+                FoundationDate
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Teams)
+        {
+        <tr>
+            <td>
+                <img src="~/images/@item.Logo"
+                     class="rounded-circle"
+                     height="40" width="40"
+                     asp-append-version="true" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OfficialWebsiteURL)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FoundationDate)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditTeam", "Team", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "DeleteTeam", "Team", new { id = item.Id })
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+<br />
+<br />
+<br />
+
+<p>
+    <a asp-controller="Tournament" asp-action="AddTournament">Create New Tournament</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Logo
+            </th>
+            <th>
+                Name
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Tournaments)
+        {
+            <tr>
+                <td>
+                    <img src="~/images/@item.Logo"
+                         class="rounded-circle"
+                         height="40" width="40"
+                         asp-append-version="true" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditTournament", "Tournament", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "DeleteTournament", "Tournament", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "DetailsTournament", "Tournament", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

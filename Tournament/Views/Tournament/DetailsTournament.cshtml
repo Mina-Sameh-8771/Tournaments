@@ -1,0 +1,101 @@
+﻿@model Tournament.Models.TournamentDetailsViewModel
+
+<meta property="og:url" content="https://www.your-domain.com/your-page.html" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Your Website Title" />
+<meta property="og:description" content="Your description" />
+<meta property="og:image" content="https://www.your-domain.com/path/image.jpg" />
+
+<div class="row">
+    <div class="col-md-4">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group" hidden>
+            <label asp-for="tournamentModel.Id" class="control-label"></label>
+            <input asp-for="tournamentModel.Id" class="form-control" />
+            <span asp-validation-for="tournamentModel.Id" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="tournamentModel.Name" class="control-label"></label>
+            <input asp-for="tournamentModel.Name" class="form-control" />
+            <span asp-validation-for="tournamentModel.Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <iframe width="420" height="345" src="https://www.youtube.com/embed/@Model.tournamentModel.YoutubeVideoKey">
+            </iframe>
+        </div>
+
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Logo
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                OfficialWebsiteURL
+            </th>
+            <th>
+                FoundationDate
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.teams)
+        {
+            <tr>
+                <td>
+                    <img src="~/images/@item.Logo"
+                         class="rounded-circle"
+                         height="40" width="40"
+                         asp-append-version="true" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OfficialWebsiteURL)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FoundationDate)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Load Facebook SDK for JavaScript -->
+<div id="fb-root"></div>
+
+<script type="text/javascript" async src="https://platform.twitter.com/widgets.js"></script>
+<script>
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+<!-- Your share button code -->
+<div class="fb-share-button"
+     data-href="https://www.yallakora.com/"
+     data-layout="button_count">
+</div>
+
+<a class="twitter-share-button"
+   href="https://twitter.com/intent/tweet?text=Hello">
+    Tweet
+</a>
+
